@@ -6,6 +6,7 @@ import (
 	"github.com/fitraditya/cloudfs/storage"
 	"github.com/fitraditya/cloudfs/storage/dropbox"
 	"github.com/fitraditya/cloudfs/storage/filesystem"
+	"github.com/fitraditya/cloudfs/storage/gdrive"
 	"github.com/fitraditya/cloudfs/storage/s3"
 	"github.com/obrel/go-lib/pkg/log"
 	"github.com/spf13/viper"
@@ -33,6 +34,12 @@ func GetStorageOption() []storage.Option {
 	case "dropbox":
 		return []storage.Option{
 			dropbox.Token(viper.GetString("storage_option.token")),
+		}
+	case "gdrive":
+		return []storage.Option{
+			gdrive.ClientId(viper.GetString("storage_option.client_id")),
+			gdrive.ClientSecret(viper.GetString("storage_option.client_secret")),
+			gdrive.Token(viper.GetString("storage_option.token")),
 		}
 	}
 

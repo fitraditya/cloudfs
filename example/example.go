@@ -8,6 +8,7 @@ import (
 	"github.com/fitraditya/cloudfs"
 	_ "github.com/fitraditya/cloudfs/storage/dropbox"
 	_ "github.com/fitraditya/cloudfs/storage/filesystem"
+	_ "github.com/fitraditya/cloudfs/storage/gdrive"
 	_ "github.com/fitraditya/cloudfs/storage/s3"
 )
 
