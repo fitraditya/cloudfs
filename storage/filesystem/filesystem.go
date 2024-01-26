@@ -2,8 +2,6 @@ package filesystem
 
 import (
 	"errors"
-	"io/fs"
-	"path/filepath"
 
 	"github.com/fitraditya/cloudfs/storage"
 	"github.com/spf13/afero"
@@ -14,12 +12,8 @@ type option struct {
 	fs       afero.Fs
 }
 
-func (s *option) Open(name string) (afero.File, error) {
-	return s.fs.Open(filepath.Join(s.basePath, name))
-}
-
-func (s *option) OpenFile(name string, flag int, perm fs.FileMode) (afero.File, error) {
-	return s.fs.OpenFile(filepath.Join(s.basePath, name), flag, perm)
+func (s *option) Fs() afero.Fs {
+	return s.fs
 }
 
 // BasePath option setter

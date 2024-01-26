@@ -1,7 +1,6 @@
 package storage
 
 import (
-	"io/fs"
 	"sync"
 
 	"github.com/obrel/go-lib/pkg/log"
@@ -15,8 +14,7 @@ var (
 
 // Storage structure
 type Storage interface {
-	Open(name string) (afero.File, error)
-	OpenFile(name string, flag int, perm fs.FileMode) (afero.File, error)
+	Fs() afero.Fs
 }
 
 // Option interface
@@ -46,11 +44,11 @@ func Register(name string, s Factory) {
 	defer lock.Unlock()
 
 	if s == nil {
-		log.For("storage", "register").Fatal("storage: could not register nil type")
+		log.For("storage", "register").Fatal("could not register nil storage")
 	}
 
 	if _, dup := storages[name]; dup {
-		log.For("storage", "register").Fatalf("storage: could not register storage twice (%s)", name)
+		log.For("storage", "register").Fatalf("could not register storage twice (%s)", name)
 	}
 
 	storages[name] = s

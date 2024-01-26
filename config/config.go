@@ -12,14 +12,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-// GetStorage
-func GetStorage() string {
-	return viper.GetString("storage")
-}
-
-// GetStorageOption
-func GetStorageOption() []storage.Option {
-	switch GetStorage() {
+// GetStorageOptions
+func GetStorageOptions(name string) []storage.Option {
+	switch name {
 	case "filesystem":
 		return []storage.Option{
 			filesystem.BasePath(viper.GetString("storage_option.base_path")),
@@ -33,13 +28,13 @@ func GetStorageOption() []storage.Option {
 		}
 	case "dropbox":
 		return []storage.Option{
-			dropbox.Token(viper.GetString("storage_option.token")),
+			dropbox.Token(viper.GetString("storage_option.dropbox_token")),
 		}
 	case "gdrive":
 		return []storage.Option{
 			gdrive.ClientId(viper.GetString("storage_option.client_id")),
 			gdrive.ClientSecret(viper.GetString("storage_option.client_secret")),
-			gdrive.Token(viper.GetString("storage_option.token")),
+			gdrive.Token(viper.GetString("storage_option.client_token")),
 		}
 	}
 

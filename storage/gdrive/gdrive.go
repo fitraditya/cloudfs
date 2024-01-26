@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
-	"io/fs"
 
 	gdrive "github.com/fclairamb/afero-gdrive"
 	"github.com/fclairamb/afero-gdrive/oauthhelper"
@@ -21,12 +20,8 @@ type option struct {
 	fs           afero.Fs
 }
 
-func (s *option) Open(name string) (afero.File, error) {
-	return s.fs.Open(name)
-}
-
-func (s *option) OpenFile(name string, flag int, perm fs.FileMode) (afero.File, error) {
-	return s.fs.OpenFile(name, flag, perm)
+func (s *option) Fs() afero.Fs {
+	return s.fs
 }
 
 // ClientId option setter

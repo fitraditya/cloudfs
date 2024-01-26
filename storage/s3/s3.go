@@ -2,7 +2,6 @@ package s3
 
 import (
 	"errors"
-	"io/fs"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -20,12 +19,8 @@ type option struct {
 	fs           afero.Fs
 }
 
-func (s *option) Open(name string) (afero.File, error) {
-	return s.fs.Open(name)
-}
-
-func (s *option) OpenFile(name string, flag int, perm fs.FileMode) (afero.File, error) {
-	return s.fs.OpenFile(name, flag, perm)
+func (s *option) Fs() afero.Fs {
+	return s.fs
 }
 
 // Region option setter

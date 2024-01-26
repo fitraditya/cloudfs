@@ -2,7 +2,6 @@ package dropbox
 
 import (
 	"errors"
-	"io/fs"
 
 	dropbox "github.com/fclairamb/afero-dropbox"
 	"github.com/fitraditya/cloudfs/storage"
@@ -14,12 +13,8 @@ type option struct {
 	fs    afero.Fs
 }
 
-func (s *option) Open(name string) (afero.File, error) {
-	return s.fs.Open(name)
-}
-
-func (s *option) OpenFile(name string, flag int, perm fs.FileMode) (afero.File, error) {
-	return s.fs.OpenFile(name, flag, perm)
+func (s *option) Fs() afero.Fs {
+	return s.fs
 }
 
 // Token option setter
