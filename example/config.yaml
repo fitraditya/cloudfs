@@ -1,0 +1,14 @@
+storage: filesystem
+storage_option:
+  base_path: ./
+
+#storage: s3
+#storage_option:
+#  region: aws-region
+#  bucket: aws-bucket
+#  access_key: aws-access-key-id
+#  access_secret: aws-secret-access-key
+
+#storage: dropbox
+#storage_option:
+#  token: dropbox-token
