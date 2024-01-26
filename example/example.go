@@ -13,8 +13,11 @@ import (
 )
 
 func main() {
+	// Init fs
+	fs := cloudfs.NewFs("dropbox")
+
 	// Open original file
-	fp, err := cloudfs.OpenFile("test.txt", os.O_RDONLY)
+	fp, err := fs.OpenFile("/users.csv", os.O_RDONLY, 0400)
 	if err != nil {
 		panic(err)
 	}
@@ -29,13 +32,13 @@ func main() {
 	fp.Close()
 
 	// Reopen original file
-	fp, err = cloudfs.OpenFile("test.txt", os.O_WRONLY|os.O_TRUNC)
+	fp, err = fs.OpenFile("/users.csv", os.O_WRONLY|os.O_TRUNC, 0700)
 	if err != nil {
 		panic(err)
 	}
 
 	// Override original file
-	_, err = fp.WriteString("Hello world!")
+	_, err = fp.WriteString("Assalamualaikum!")
 	if err != nil {
 		panic(err)
 	}
@@ -43,7 +46,7 @@ func main() {
 	fp.Close()
 
 	// Open modified file
-	fp, err = cloudfs.OpenFile("test.txt", os.O_RDONLY)
+	fp, err = fs.OpenFile("/users.csv", os.O_RDONLY, 0400)
 	if err != nil {
 		panic(err)
 	}
