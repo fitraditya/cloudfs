@@ -17,7 +17,7 @@ type option struct {
 	bucket       string
 	accessKey    string
 	accessSecret string
-	fs           *s3.Fs
+	fs           afero.Fs
 }
 
 func (s *option) Open(name string) (afero.File, error) {

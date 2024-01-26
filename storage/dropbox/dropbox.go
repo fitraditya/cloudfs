@@ -11,7 +11,7 @@ import (
 
 type option struct {
 	token string
-	fs    *dropbox.Fs
+	fs    afero.Fs
 }
 
 func (s *option) Open(name string) (afero.File, error) {
