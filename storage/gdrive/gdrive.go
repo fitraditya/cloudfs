@@ -58,6 +58,18 @@ func init() {
 			}
 		}
 
+		if s.clientId == "" {
+			return nil, errors.New("gdrive: missing google client id")
+		}
+
+		if s.clientSecret == "" {
+			return nil, errors.New("gdrive: missing google client secret")
+		}
+
+		if s.token == "" {
+			return nil, errors.New("gdrive: missing access token")
+		}
+
 		helper := oauthhelper.Auth{
 			ClientID:     s.clientId,
 			ClientSecret: s.clientSecret,

@@ -64,6 +64,22 @@ func init() {
 			}
 		}
 
+		if s.region == "" {
+			return nil, errors.New("s3: missing aws region")
+		}
+
+		if s.accessKey == "" {
+			return nil, errors.New("s3: missing aws access key id")
+		}
+
+		if s.accessSecret == "" {
+			return nil, errors.New("s3: missing aws access key secret")
+		}
+
+		if s.bucket == "" {
+			return nil, errors.New("s3: missing aws bucket")
+		}
+
 		sess, err := session.NewSession(&aws.Config{
 			Region:      aws.String(s.region),
 			Credentials: credentials.NewStaticCredentials(s.accessKey, s.accessSecret, ""),

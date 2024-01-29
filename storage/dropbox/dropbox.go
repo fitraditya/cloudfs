@@ -37,6 +37,10 @@ func init() {
 			}
 		}
 
+		if s.token == "" {
+			return nil, errors.New("dropbox: missing access token")
+		}
+
 		s.fs = dropbox.NewFs(s.token)
 
 		return s, nil

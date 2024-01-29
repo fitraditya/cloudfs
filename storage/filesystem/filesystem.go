@@ -36,7 +36,11 @@ func init() {
 			}
 		}
 
-		s.fs = afero.NewOsFs()
+		if s.basePath == "" {
+			return nil, errors.New("filesystem: missing base path")
+		}
+
+		s.fs = afero.NewBasePathFs(afero.NewOsFs(), s.basePath)
 
 		return s, nil
 	})
